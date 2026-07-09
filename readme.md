@@ -1,22 +1,41 @@
-# Getting Started
+# SAP BTP Enterprise AI Lab
 
-Welcome to your new CAP project.
+Personal SAP Enterprise AI Architect learning portfolio built on SAP BTP Trial.
 
-It contains these folders and files, following our recommended project layout:
+## Phase 1: CAP Foundation
 
-File or Folder | Purpose
----------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
-`readme.md` | this getting started guide
+Status: Completed
 
-## Next Steps
+This phase creates the foundation for future Enterprise AI proof-of-concepts using SAP Cloud Application Programming Model.
 
-- Open a new terminal and run `cds watch`
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start with your domain model, in a CDS file in `db/`
+## Current Features
 
-## Learn More
+- CAP Node.js project
+- CDS data model
+- Books entity
+- CatalogService OData service
+- CSV-based sample data
+- SQLite local persistence
+- Fiori Preview validation
+- GitHub version control
 
-Learn more at <https://cap.cloud.sap>.
+## Architecture
+
+User  
+→ Fiori Preview  
+→ CAP CatalogService  
+→ Books Entity  
+→ SQLite / CSV Data
+
+## Project Structure
+
+```text
+app/
+db/
+  schema.cds
+  data/
+    capbookstore01-Books.csv
+srv/
+  catalog-service.cds
+package.json
+readme.md
