@@ -1,0 +1,11 @@
+using CatalogService as service from './catalog-service';
+
+annotate service.Books with @(
+  UI.LineItem : [
+    { Value: title, Label: 'Title' },
+    { Value: author, Label: 'Author' },
+    { Value: genre, Label: 'Genre' },
+    { Value: price, Label: 'Price' },
+    { Value: stock, Label: 'Stock' }
+  ]
+);
