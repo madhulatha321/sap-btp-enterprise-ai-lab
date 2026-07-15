@@ -1,41 +1,15 @@
-# SAP BTP Enterprise AI Lab
+# 🚀 SAP BTP Enterprise AI Lab
 
-Personal SAP Enterprise AI Architect learning portfolio built on SAP BTP Trial.
+> Personal learning journey on SAP BTP Trial to build Enterprise AI applications using SAP Cloud Application Programming Model (CAP), SAP Fiori Elements, SAP HANA Cloud, and SAP Business AI technologies.
 
-## Phase 1: CAP Foundation
+---
 
-Status: Completed
+# 📖 About this Repository
 
-This phase creates the foundation for future Enterprise AI proof-of-concepts using SAP Cloud Application Programming Model.
+This repository documents my hands-on SAP BTP learning journey as I build enterprise-grade applications step by step.
 
-## Current Features
+The goal is not to build isolated demos, but to evolve a single application into an Enterprise AI Assistant using SAP technologies.
 
-- CAP Node.js project
-- CDS data model
-- Books entity
-- CatalogService OData service
-- CSV-based sample data
-- SQLite local persistence
-- Fiori Preview validation
-- GitHub version control
+---
 
-## Architecture
-
-User  
-→ Fiori Preview  
-→ CAP CatalogService  
-→ Books Entity  
-→ SQLite / CSV Data
-
-## Project Structure
-
-```text
-app/
-db/
-  schema.cds
-  data/
-    capbookstore01-Books.csv
-srv/
-  catalog-service.cds
-package.json
-readme.md
+# 🏗️ Current Architecture
