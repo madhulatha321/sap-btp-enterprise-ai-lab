@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enterprise AI Assistant</title>
+
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background:#f4f6f9;
+            margin:40px;
+        }
+
+        .card{
+            background:white;
+            max-width:900px;
+            margin:auto;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0 4px 12px rgba(0,0,0,.15);
+        }
+
+        h1{
+            color:#0a6ed1;
+        }
+
+        input{
+            width:70%;
+            padding:12px;
+            font-size:16px;
+            border-radius:6px;
+            border:1px solid #ccc;
+        }
+
+        button{
+            padding:12px 20px;
+            font-size:16px;
+            background:#0a6ed1;
+            color:white;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#0854a0;
+        }
+
+        #result{
+            margin-top:25px;
+        }
+
+        .book{
+            background:white;
+            border-left:6px solid #0a6ed1;
+            padding:18px;
+            margin-bottom:15px;
+            border-radius:8px;
+            box-shadow:0 2px 8px rgba(0,0,0,.08);
+        }
+
+        .title{
+            font-size:22px;
+            font-weight:bold;
+            color:#0a6ed1;
+            margin-bottom:10px;
+        }
+
+        .field{
+            margin:6px 0;
+            font-size:16px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>🤖 Enterprise AI Assistant</h1>
+
+<p>
+Ask questions in natural language.
+</p>
+
+<input
+id="question"
+value="Show SAP books under 60">
+
+<button onclick="ask()">
+Ask
+</button>
+
+<div id="result">
+
+</div>
+
+</div>
+
+<script>
+
+async function ask(){
+
+    const question=document.getElementById("question").value;
+
+    const response=await fetch("/odata/v4/catalog/ask",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+            question
+        })
+
+    });
+
+    const data=await response.json();
+
+    const books=data.value || [];
+
+    if(books.length===0){
+
+        document.getElementById("result").innerHTML=
+        "<h3>No matching books found.</h3>";
+
+        return;
+    }
+
+    let html="";
+
+    books.forEach(book=>{
+
+        html+=`
+
+        <div class="book">
+
+            <div class="title">
+                📘 ${book.title}
+            </div>
+
+            <div class="field">
+                👤 <b>Author:</b> ${book.author}
+            </div>
+
+            <div class="field">
+                📚 <b>Genre:</b> ${book.genre}
+            </div>
+
+            <div class="field">
+                💰 <b>Price:</b> $${book.price}
+            </div>
+
+            <div class="field">
+                📦 <b>Stock:</b> ${book.stock}
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById("result").innerHTML=html;
+
+}
+
+</script>
+
+</body>
+</html>
