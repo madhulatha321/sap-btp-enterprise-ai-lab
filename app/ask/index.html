@@ -8,7 +8,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Enterprise AI Assistant</title>
+  <title>Enterprise Business Intelligence Assistant</title>
 
   <style>
     :root {
@@ -23,8 +23,9 @@
       --sap-light-blue: #ebf5fe;
       --sap-green: #188918;
       --sap-green-light: #eaf7ea;
-      --sap-orange: #e76500;
+      --sap-purple: #7255d9;
       --sap-error: #bb0000;
+      --sap-warning: #e76500;
       --sap-shadow: 0 8px 28px rgba(30, 52, 74, 0.12);
     }
 
@@ -80,12 +81,12 @@
       display: grid;
       place-items: center;
       border-radius: 10px;
-      font-size: 22px;
+      font-size: 19px;
       background:
         linear-gradient(
           135deg,
           #67c5ff,
-          #0070f2
+          var(--sap-blue)
         );
     }
 
@@ -101,7 +102,7 @@
     }
 
     .page {
-      width: min(1120px, calc(100% - 32px));
+      width: min(1180px, calc(100% - 32px));
       margin: 28px auto 60px;
     }
 
@@ -115,8 +116,8 @@
         linear-gradient(
           125deg,
           #003b7a 0%,
-          #0070f2 58%,
-          #5f43d7 100%
+          var(--sap-blue) 58%,
+          var(--sap-purple) 100%
         );
       box-shadow: var(--sap-shadow);
     }
@@ -133,18 +134,20 @@
     }
 
     .hero-eyebrow {
+      position: relative;
+      z-index: 1;
       margin: 0 0 10px;
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      opacity: 0.85;
+      opacity: 0.9;
     }
 
     .hero h1 {
       position: relative;
       z-index: 1;
-      max-width: 760px;
+      max-width: 800px;
       margin: 0;
       font-size: clamp(30px, 5vw, 50px);
       line-height: 1.08;
@@ -153,7 +156,7 @@
     .hero p {
       position: relative;
       z-index: 1;
-      max-width: 720px;
+      max-width: 760px;
       margin: 16px 0 0;
       font-size: 17px;
       line-height: 1.6;
@@ -196,7 +199,7 @@
         linear-gradient(
           135deg,
           var(--sap-blue),
-          #7255d9
+          var(--sap-purple)
         );
       box-shadow: 0 8px 18px rgba(0, 112, 242, 0.25);
     }
@@ -264,7 +267,7 @@
     }
 
     #askButton {
-      min-width: 126px;
+      min-width: 150px;
       min-height: 50px;
       padding: 0 22px;
       border: 0;
@@ -315,9 +318,6 @@
       color: var(--sap-blue-dark);
       background: #f5faff;
       cursor: pointer;
-      transition:
-        background 0.2s,
-        border-color 0.2s;
     }
 
     .prompt-chip:hover {
@@ -328,7 +328,7 @@
     .workspace {
       margin-top: 22px;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 300px;
+      grid-template-columns: minmax(0, 1fr) 310px;
       gap: 22px;
       align-items: start;
     }
@@ -342,7 +342,7 @@
     }
 
     .conversation-card {
-      min-height: 430px;
+      min-height: 470px;
       overflow: hidden;
     }
 
@@ -367,7 +367,7 @@
     }
 
     .empty-state {
-      min-height: 300px;
+      min-height: 330px;
       display: grid;
       place-items: center;
       padding: 30px;
@@ -406,7 +406,7 @@
     }
 
     .message-content {
-      max-width: 90%;
+      max-width: 94%;
     }
 
     .message-label {
@@ -461,7 +461,7 @@
     }
 
     .assistant-response {
-      margin-top: 16px;
+      margin-top: 6px;
       padding: 18px;
       border: 1px solid #e0e8ef;
       border-radius: 14px;
@@ -486,7 +486,7 @@
         linear-gradient(
           135deg,
           var(--sap-blue),
-          #7255d9
+          var(--sap-purple)
         );
     }
 
@@ -496,61 +496,94 @@
     }
 
     .response-time {
-      margin: 4px 0 0;
-      color: var(--sap-text-secondary);
-      font-size: 12px;
-    }
+  margin: 4px 0 0;
+  color: var(--sap-text-secondary);
+  font-size: 12px;
+}
 
     .answer-summary {
       margin: 16px 0 0;
       line-height: 1.65;
+      font-size: 15px;
     }
 
-    .reason-box {
+    .intent-row {
       margin-top: 14px;
-      padding: 13px 14px;
-      border-left: 4px solid var(--sap-blue);
-      border-radius: 8px;
-      color: #29445c;
-      background: #f7fbff;
-      line-height: 1.55;
-    }
-
-    .reason-title {
-      margin-bottom: 4px;
-      color: var(--sap-blue-dark);
-      font-weight: 700;
-    }
-
-    .match-quality {
-      margin-top: 13px;
       display: flex;
-      align-items: center;
-      gap: 9px;
       flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
     }
 
-    .match-label {
+    .intent-label {
       color: var(--sap-text-secondary);
-      font-size: 13px;
-    }
-
-    .match-badge {
-      padding: 5px 9px;
-      border-radius: 999px;
-      color: var(--sap-green);
-      background: var(--sap-green-light);
       font-size: 12px;
       font-weight: 700;
     }
 
-    .match-note {
+    .intent-badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--sap-blue-dark);
+      background: var(--sap-light-blue);
+      border: 1px solid #c8e1f7;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .analytics-section {
+      margin-top: 18px;
+    }
+
+    .analytics-title {
+      margin: 0 0 11px;
+      font-size: 15px;
+      color: var(--sap-text);
+    }
+
+    .analytics-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+
+    .analytics-card {
+      padding: 15px;
+      border: 1px solid #dfe8ef;
+      border-radius: 12px;
+      background:
+        linear-gradient(
+          135deg,
+          #f7fbff,
+          #ffffff
+        );
+    }
+
+    .analytics-label {
       color: var(--sap-text-secondary);
-      font-size: 11px;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .analytics-value {
+      margin-top: 6px;
+      color: var(--sap-blue-dark);
+      font-size: 23px;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .results-section {
+      margin-top: 18px;
+    }
+
+    .results-title {
+      margin: 0 0 11px;
+      font-size: 15px;
     }
 
     .results-grid {
-      margin-top: 16px;
       display: grid;
       grid-template-columns:
         repeat(auto-fit, minmax(230px, 1fr));
@@ -576,12 +609,12 @@
         linear-gradient(
           to bottom,
           var(--sap-blue),
-          #7255d9
+          var(--sap-purple)
         );
     }
 
     .book-icon {
-      font-size: 26px;
+      font-size: 25px;
     }
 
     .book-title {
@@ -612,8 +645,8 @@
     }
 
     .follow-up {
-      margin-top: 17px;
-      padding-top: 15px;
+      margin-top: 18px;
+      padding-top: 16px;
       border-top: 1px solid #edf0f3;
     }
 
@@ -717,9 +750,10 @@
       text-align: center;
       color: var(--sap-text-secondary);
       font-size: 12px;
+      line-height: 1.5;
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 880px) {
       .workspace {
         grid-template-columns: 1fr;
       }
@@ -745,7 +779,7 @@
       }
 
       .page {
-        width: min(100% - 20px, 1120px);
+        width: min(100% - 20px, 1180px);
         margin-top: 12px;
       }
 
@@ -788,7 +822,7 @@
 <body>
   <header class="shell-header">
     <div class="shell-brand">
-      <div class="shell-logo">AI</div>
+      <div class="shell-logo">BI</div>
 
       <div class="shell-title">
         SAP BTP Enterprise AI Lab
@@ -803,17 +837,17 @@
   <main class="page">
     <section class="hero">
       <p class="hero-eyebrow">
-        Enterprise AI Assistant — POC 3.1
+        Enterprise Business Intelligence Assistant — POC 4
       </p>
 
       <h1>
-        How can I help you with your business data?
+        Ask business questions and receive structured insights
       </h1>
 
       <p>
-        Ask questions in natural language. The assistant invokes a
-        custom SAP CAP action, applies business rules, and returns
-        structured results from the CDS data model.
+        The assistant detects supported business intents, invokes a
+        custom SAP CAP action and returns analytical insights together
+        with matching records from the CDS data model.
       </p>
     </section>
 
@@ -826,12 +860,12 @@
 
           <div>
             <h2 class="assistant-title">
-              Enterprise AI Assistant
+              Enterprise BI Assistant
             </h2>
 
             <p class="assistant-subtitle">
-              Joule-inspired experience built with SAP CAP,
-              OData V4 and JavaScript.
+              Rule-based business intelligence experience built with
+              SAP CAP, OData V4 and JavaScript.
             </p>
           </div>
         </div>
@@ -850,52 +884,68 @@
         <input
           id="question"
           type="text"
-          placeholder="Example: Show SAP books under 60"
-          value="Show SAP books under 60"
+          placeholder="Example: What is the average price?"
+          value="What is the average price?"
           autocomplete="off"
         >
 
         <button id="askButton" type="button">
-          Ask Enterprise AI
+          Ask Enterprise BI
         </button>
       </div>
 
       <div class="prompt-section">
         <div class="prompt-title">
-          Suggested questions
+          Suggested business questions
         </div>
 
         <div class="prompt-list">
           <button
             class="prompt-chip"
             type="button"
+            data-question="What is the average price?"
+          >
+            Average price
+          </button>
+
+          <button
+            class="prompt-chip"
+            type="button"
+            data-question="What is the total stock?"
+          >
+            Total stock
+          </button>
+
+          <button
+            class="prompt-chip"
+            type="button"
+            data-question="Which is the most expensive book?"
+          >
+            Most expensive
+          </button>
+
+          <button
+            class="prompt-chip"
+            type="button"
+            data-question="Which is the cheapest book?"
+          >
+            Cheapest book
+          </button>
+
+          <button
+            class="prompt-chip"
+            type="button"
+            data-question="Show genre summary"
+          >
+            Genre summary
+          </button>
+
+          <button
+            class="prompt-chip"
+            type="button"
             data-question="Show SAP books under 60"
           >
-            Show SAP books under 60
-          </button>
-
-          <button
-            class="prompt-chip"
-            type="button"
-            data-question="Show AI books"
-          >
-            Show AI books
-          </button>
-
-          <button
-            class="prompt-chip"
-            type="button"
-            data-question="Which book has highest stock?"
-          >
-            Highest stock
-          </button>
-
-          <button
-            class="prompt-chip"
-            type="button"
-            data-question="Show books under 50"
-          >
-            Books under 50
+            SAP books under 60
           </button>
         </div>
       </div>
@@ -904,11 +954,11 @@
     <section class="workspace">
       <article class="conversation-card">
         <div class="card-header">
-          <h2>Conversation</h2>
+          <h2>Business conversation</h2>
 
           <p>
-            Questions and assistant responses remain visible during
-            the current browser session.
+            Questions, analytical answers and matching records remain
+            visible during the current browser session.
           </p>
         </div>
 
@@ -920,13 +970,12 @@
               </div>
 
               <h3>
-                Start a business conversation
+                Start a business intelligence conversation
               </h3>
 
               <p>
-                Enter a question above or select a suggested prompt.
-                The assistant will query the CAP service and display
-                matching business records.
+                Ask for average price, total stock, genre summary,
+                book counts, price filters or ranked business records.
               </p>
             </div>
           </div>
@@ -966,6 +1015,20 @@
               —
             </div>
           </div>
+
+          <div class="metric">
+            <div class="metric-label">
+              Last detected intent
+            </div>
+
+            <div
+              id="lastIntent"
+              class="metric-value"
+              style="font-size: 16px;"
+            >
+              —
+            </div>
+          </div>
         </section>
 
         <section class="insight-card">
@@ -974,7 +1037,7 @@
           <div class="architecture-flow">
             <div class="architecture-step">
               <span class="architecture-number">1</span>
-              Joule-inspired Web UI
+              Enterprise BI Web UI
             </div>
 
             <div class="architecture-step">
@@ -984,16 +1047,21 @@
 
             <div class="architecture-step">
               <span class="architecture-number">3</span>
-              CatalogService — OData V4
+              Business intent detection
             </div>
 
             <div class="architecture-step">
               <span class="architecture-number">4</span>
-              Books CDS entity
+              Analytics and filtering logic
             </div>
 
             <div class="architecture-step">
               <span class="architecture-number">5</span>
+              Books CDS entity
+            </div>
+
+            <div class="architecture-step">
+              <span class="architecture-number">6</span>
               SQLite in-memory database
             </div>
           </div>
@@ -1002,9 +1070,9 @@
     </section>
 
     <p class="footer-note">
-      Personal learning POC built on SAP BTP Trial. Current question
-      interpretation is rule-based; SAP Generative AI Hub integration
-      is a future phase.
+      Personal learning POC built on SAP BTP Trial. Current intent
+      detection is rule-based. SAP HANA Cloud and SAP Generative AI Hub
+      integration are planned future phases.
     </p>
   </main>
 
@@ -1026,6 +1094,9 @@
 
     const responseTimeElement =
       document.getElementById("responseTime");
+
+    const lastIntentElement =
+      document.getElementById("lastIntent");
 
     let questionCount = 0;
 
@@ -1083,13 +1154,13 @@
           >
             <div class="message-content">
               <div class="message-label">
-                Enterprise AI · ${escapeHtml(formatTime())}
+                Enterprise BI · ${escapeHtml(formatTime())}
               </div>
 
               <div class="bubble">
                 <div class="thinking">
                   <span class="spinner"></span>
-                  Analysing the question and querying CAP data...
+                  Detecting business intent and calculating results...
                 </div>
               </div>
             </div>
@@ -1104,102 +1175,22 @@
         ?.remove();
     }
 
-    function buildReason(question, books) {
-      const normalized =
-        question.toLowerCase();
+    function createAnalyticsCards(analytics) {
+      return analytics
+        .map(
+          (item) => `
+            <article class="analytics-card">
+              <div class="analytics-label">
+                ${escapeHtml(item.label)}
+              </div>
 
-      if (
-        normalized.includes("highest stock")
-      ) {
-        return (
-          "The assistant identified a stock-ranking request and " +
-          "returned the record with the highest available stock."
-        );
-      }
-
-      if (
-        normalized.includes("sap") &&
-        (
-          normalized.includes("under 60") ||
-          normalized.includes("below 60") ||
-          normalized.includes("less than 60")
+              <div class="analytics-value">
+                ${escapeHtml(item.value)}
+              </div>
+            </article>
+          `
         )
-      ) {
-        return (
-          "The assistant matched the SAP genre and applied the " +
-          "requested price threshold below 60."
-        );
-      }
-
-      if (
-        normalized.includes("ai") ||
-        normalized.includes(
-          "artificial intelligence"
-        )
-      ) {
-        return (
-          "The assistant identified an Artificial Intelligence " +
-          "category request and returned matching records."
-        );
-      }
-
-      if (
-        normalized.includes("under 50") ||
-        normalized.includes("below 50") ||
-        normalized.includes("less than 50")
-      ) {
-        return (
-          "The assistant interpreted the request as a price filter " +
-          "and returned records priced below 50."
-        );
-      }
-
-      if (normalized.includes("sap")) {
-        return (
-          "The assistant identified SAP as the requested business " +
-          "category and returned matching records."
-        );
-      }
-
-      if (books.length > 0) {
-        return (
-          "No specific supported rule was detected, so the current " +
-          "POC returned the records supplied by the CAP action."
-        );
-      }
-
-      return (
-        "The current rule-based POC could not identify a supported " +
-        "query pattern for this request."
-      );
-    }
-
-    function getMatchQuality(question) {
-      const normalized =
-        question.toLowerCase();
-
-      const supportedPatterns = [
-        "sap",
-        "ai",
-        "artificial intelligence",
-        "highest stock",
-        "under 60",
-        "below 60",
-        "less than 60",
-        "under 50",
-        "below 50",
-        "less than 50"
-      ];
-
-      const hasSupportedPattern =
-        supportedPatterns.some(
-          (pattern) =>
-            normalized.includes(pattern)
-        );
-
-      return hasSupportedPattern
-        ? "High rule match"
-        : "Fallback response";
+        .join("");
     }
 
     function createBookCards(books) {
@@ -1227,7 +1218,9 @@
 
               <div class="book-field">
                 <strong>Price:</strong>
-                $${escapeHtml(book.price)}
+                $${escapeHtml(
+                  Number(book.price).toFixed(2)
+                )}
               </div>
 
               <div class="book-field">
@@ -1244,40 +1237,54 @@
         .join("");
     }
 
-    function getFollowUpQuestions(question) {
-      const normalized =
-        question.toLowerCase();
+    function getFollowUpQuestions(intent) {
+      const questionMap = {
+        AVERAGE_PRICE: [
+          "What is the total stock?",
+          "Which is the most expensive book?",
+          "Show genre summary"
+        ],
 
-      if (normalized.includes("sap")) {
-        return [
+        TOTAL_STOCK: [
+          "How many books are available?",
+          "Which book has highest stock?",
+          "Show genre summary"
+        ],
+
+        MOST_EXPENSIVE_BOOK: [
+          "Which is the cheapest book?",
+          "What is the average price?",
+          "Show books under 50"
+        ],
+
+        CHEAPEST_BOOK: [
+          "Which is the most expensive book?",
+          "What is the average price?",
+          "Show SAP books under 60"
+        ],
+
+        GENRE_SUMMARY: [
+          "Show SAP books",
           "Show AI books",
-          "Which book has highest stock?",
-          "Show books under 50"
-        ];
-      }
+          "How many books are available?"
+        ],
 
-      if (
-        normalized.includes("ai") ||
-        normalized.includes(
-          "artificial intelligence"
-        )
-      ) {
-        return [
-          "Show SAP books under 60",
+        PRICE_FILTER: [
+          "What is the average price?",
           "Which book has highest stock?",
-          "Show books under 50"
-        ];
-      }
+          "Show genre summary"
+        ]
+      };
 
-      return [
-        "Show SAP books under 60",
-        "Show AI books",
-        "Which book has highest stock?"
+      return questionMap[intent] || [
+        "What is the average price?",
+        "What is the total stock?",
+        "Show genre summary"
       ];
     }
 
-    function createFollowUpButtons(question) {
-      return getFollowUpQuestions(question)
+    function createFollowUpButtons(intent) {
+      return getFollowUpQuestions(intent)
         .map(
           (followUpQuestion) => `
             <button
@@ -1295,38 +1302,19 @@
     }
 
     function addAssistantResponse({
-      question,
+      intent,
+      message,
       books,
+      analytics,
       duration
     }) {
-      const count = books.length;
-
-      const resultText =
-        count === 1
-          ? "I found 1 matching business record."
-          : `I found ${count} matching business records.`;
-
-      const summary =
-        count === 0
-          ? (
-              "I could not find matching records for this question. " +
-              "Try one of the supported suggested prompts."
-            )
-          : resultText;
-
-      const reason =
-        buildReason(question, books);
-
-      const matchQuality =
-        getMatchQuality(question);
-
       conversation.insertAdjacentHTML(
         "beforeend",
         `
           <div class="message assistant">
             <div class="message-content">
               <div class="message-label">
-                Enterprise AI · ${escapeHtml(formatTime())}
+                Enterprise BI · ${escapeHtml(formatTime())}
               </div>
 
               <div class="bubble">
@@ -1338,7 +1326,7 @@
 
                     <div>
                       <h3>
-                        Enterprise AI response
+                        Enterprise BI response
                       </h3>
 
                       <p class="response-time">
@@ -1349,38 +1337,47 @@
                   </div>
 
                   <p class="answer-summary">
-                    ${escapeHtml(summary)}
+                    ${escapeHtml(message)}
                   </p>
 
-                  <div class="reason-box">
-                    <div class="reason-title">
-                      Why this response?
-                    </div>
-
-                    ${escapeHtml(reason)}
-                  </div>
-
-                  <div class="match-quality">
-                    <span class="match-label">
-                      Interpretation:
+                  <div class="intent-row">
+                    <span class="intent-label">
+                      Detected intent:
                     </span>
 
-                    <span class="match-badge">
-                      ${escapeHtml(matchQuality)}
-                    </span>
-
-                    <span class="match-note">
-                      Heuristic indicator for the current rule-based POC,
-                      not an LLM confidence score.
+                    <span class="intent-badge">
+                      ${escapeHtml(intent)}
                     </span>
                   </div>
 
                   ${
-                    count > 0
+                    analytics.length > 0
                       ? `
-                        <div class="results-grid">
-                          ${createBookCards(books)}
-                        </div>
+                        <section class="analytics-section">
+                          <h4 class="analytics-title">
+                            Business analytics
+                          </h4>
+
+                          <div class="analytics-grid">
+                            ${createAnalyticsCards(analytics)}
+                          </div>
+                        </section>
+                      `
+                      : ""
+                  }
+
+                  ${
+                    books.length > 0
+                      ? `
+                        <section class="results-section">
+                          <h4 class="results-title">
+                            Matching business records
+                          </h4>
+
+                          <div class="results-grid">
+                            ${createBookCards(books)}
+                          </div>
+                        </section>
                       `
                       : ""
                   }
@@ -1391,7 +1388,7 @@
                     </div>
 
                     <div class="follow-up-list">
-                      ${createFollowUpButtons(question)}
+                      ${createFollowUpButtons(intent)}
                     </div>
                   </div>
                 </div>
@@ -1411,7 +1408,7 @@
           <div class="message assistant">
             <div class="message-content">
               <div class="message-label">
-                Enterprise AI · ${escapeHtml(formatTime())}
+                Enterprise BI · ${escapeHtml(formatTime())}
               </div>
 
               <div class="bubble">
@@ -1423,14 +1420,6 @@
           </div>
         `
       );
-    }
-
-    function scrollToLatestMessage() {
-      conversation.lastElementChild
-        ?.scrollIntoView({
-          behavior: "smooth",
-          block: "end"
-        });
     }
 
     function bindFollowUpButtons() {
@@ -1450,6 +1439,14 @@
               askQuestion();
             }
           );
+        });
+    }
+
+    function scrollToLatestMessage() {
+      conversation.lastElementChild
+        ?.scrollIntoView({
+          behavior: "smooth",
+          block: "end"
         });
     }
 
@@ -1506,9 +1503,21 @@
           await response.json();
 
         const books =
-          Array.isArray(data.value)
-            ? data.value
+          Array.isArray(data.books)
+            ? data.books
             : [];
+
+        const analytics =
+          Array.isArray(data.analytics)
+            ? data.analytics
+            : [];
+
+        const intent =
+          data.intent || "UNKNOWN";
+
+        const message =
+          data.message ||
+          "The CAP service returned a response without a message.";
 
         const duration =
           Math.max(
@@ -1521,14 +1530,23 @@
         removeThinkingMessage();
 
         resultCountElement.textContent =
-          String(books.length);
+          String(
+            Number.isInteger(data.resultCount)
+              ? data.resultCount
+              : books.length
+          );
 
         responseTimeElement.textContent =
           `${duration} ms`;
 
+        lastIntentElement.textContent =
+          intent;
+
         addAssistantResponse({
-          question,
+          intent,
+          message,
           books,
+          analytics,
           duration
         });
       } catch (error) {
@@ -1542,6 +1560,9 @@
         responseTimeElement.textContent =
           "Error";
 
+        lastIntentElement.textContent =
+          "REQUEST_ERROR";
+
         addErrorResponse(
           "The assistant could not process the request. " +
           "Confirm that cds watch is running and try again."
@@ -1549,7 +1570,7 @@
       } finally {
         askButton.disabled = false;
         askButton.textContent =
-          "Ask Enterprise AI";
+          "Ask Enterprise BI";
 
         scrollToLatestMessage();
       }
